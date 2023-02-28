@@ -1,20 +1,59 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
+function generateMarkdown(response) {
+  let ToC = `## Table of Contents`;
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
+  if (response.installation !== '') { ToC += `
+  * [Installation](#installation)` };
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
+  if (response.usage !== '') { ToC += `
+  * [Usage](#usage)` };
 
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  return `# ${data.title}
+  if (response.contributing != '') { ToC += `
+  * [Contributing](#contributing)` };
 
-`;
+  if (response.test !== '') { ToC += `
+  * [Test](#test)` };
+
+  let draftMarkdown = 
+  `# ${response.title}
+
+  ## Description
+   ${response.description}
+  `
+
+  draftMarkdown += ToC;
+  draftMarkdown += `
+  * [License](#license)`;
+
+  if (response.installation !== '') {
+    draftMarkdown += `
+    ## Installation
+    ${response.installation}`
+  };
+
+  if (response.usage !== '') {
+    draftMarkdown += `
+    ## Usage
+      ${response.usage}`
+  };
+
+  if (response.contribution !== '') {
+    draftMarkdown += `
+    ## Contribution
+    ${response.contribution}`
+  };
+
+  if (response.test !== '') {
+    draftMarkdown += `
+    ## Test
+    ${response.test}`
+  };
+
+  if (response.license !== '') {
+    draftMarkdown += `
+    ## License
+    ${response.license}`
+  };
+
+  return draftMarkdown;
 }
-
 module.exports = generateMarkdown;
